@@ -1,0 +1,97 @@
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url(./fonts/HelveticaNeue-UltraLight.otf) format('opentype');
+  font-weight: 600;
+  font-style: 'normal';
+}
+
+@font-face {
+  font-family: "Helvetica Neue Roman";
+  src: url(./fonts/HelveticaNeue-Roman.otf) format('opentype');
+}
+
+body {
+  background-color: black;
+}
+
+.display{
+  color:white;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  text-align: center;
+  position: relative;
+  top: 100px;
+  font-size: 70px;
+  font-family: Helvetica;
+  font-weight: 100;
+}
+
+.laplist{
+  color:white;
+}
+
+.startstop{
+  
+  width: 30%;
+  position: relative;
+  float: right;
+  text-align: center;
+}
+
+.resetlap{
+  width: 30%;
+  position: relative;
+  float: left;
+  text-align: center;
+}
+
+.button_container div{
+  display:inline-block;
+  
+}
+
+.button_container{
+  position: relative;
+  top:100px;
+}
+
+.laplist{
+  position: relative;
+  top: 200px;
+  font-family: Helvetica;
+  text-align: center;
+  list-style: none;
+}
+
+.resetbtn{
+  border-radius: 50%;
+  border: 1px double #b6b1b1;
+  
+  height: 50px;
+  width: 50px;
+  background-color: #9ea09e;
+  opacity: 0.5;
+  color: white;
+}
+
+.startbtn{
+  border-radius: 50%;
+  border: 1px double #159d35;
+  
+  height: 50px;
+  width: 50px;
+  background-color: #235b30;
+  opacity: 0.5;
+  color: #08ef08;
+}
+
+.stopbtn{
+  border-radius: 50%;
+  border: 1px double #d3837d;
+  height: 50px;
+  width: 50px;
+  background-color: #d2857f;
+  opacity: 0.5;
+  color: #ec2315;
+}
