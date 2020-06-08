@@ -2,18 +2,12 @@ var h1 = document.getElementsByTagName('h1')[0];
 const start = document.getElementById('start');
 const reset = document.getElementById('reset');
 let intervalToken = null;
-var seconds = 0; 
-var minutes = 0;
-var mseconds = 0;
 const Laps = document.getElementById('laps');
-var lseconds = null;
-var lminutes =null;
-var lmseconds=null;
+var isInitial=true;
 var time=[];
 var index=0;
 var lasttime=0;
 var startTime;
-var updatedTime;
 var difference=0;
 var stopTime=0;
 var lastmin=0;
@@ -41,21 +35,26 @@ function startStop(){
 }
 
 
-
 function getShowTime(){
-    updatedTime = new Date().getTime();
+    var updatedTime = new Date().getTime();
     difference = (updatedTime - startTime) + stopTime;
-    mseconds = Math.floor(difference/10) % 100;
-    seconds = Math.floor(Math.floor(difference/10)/100)%60;
-    minutes = Math.floor(Math.floor(Math.floor(difference/10)/100)/60);
     
-    
-    mseconds = (mseconds < 10) ? "0" + mseconds : mseconds;
-    seconds = (seconds < 10) ? "0" + seconds : seconds;
-    minutes = (minutes < 10) ? "0" + minutes : minutes;
-    h1.textContent = minutes + ':' + seconds + ',' + mseconds;
+    h1.textContent = formatTime(difference);
 }
 
+function formatTime(difference) {
+    var minutes;
+    var secs;
+    var centies;
+    centies = Math.floor(difference/10) % 100;
+    secs = Math.floor(Math.floor(difference/10)/100)%60;
+    minutes = Math.floor(Math.floor(Math.floor(difference/10)/100)/60);
+
+    centies = (centies < 10) ? "0" + centies : centies;
+    secs = (secs < 10) ? "0" + secs : secs;
+    minutes = (minutes < 10) ? "0" + minutes : minutes;
+    return `${minutes}:${secs},${centies}`;
+}
 
 function resetLap(){
     if(intervalToken != null){
@@ -74,29 +73,28 @@ function resetLap(){
 }
 
 function loglap() {
-  if(lmseconds==null){
-    lmseconds=mseconds;
-    lseconds=seconds;
-    lminutes=minutes;
-    time[index]= Math.floor(difference/10);
+    var laptime;
+  
+    if(isInitial){
+      
+   
+    laptime=formatTime(difference);
+    time[index]= difference;
     lasttime=time[index];
+    isInitial=false;
   }else{
-      time[index]=Math.floor(difference/10)-lasttime;
-      lasttime =Math.floor(difference/10);
-      lmseconds=time[index]%100;
-      lseconds=(Math.floor(time[index]/100))%60;
-      lminutes=Math.floor((Math.floor(time[index]/100))/60);
-      lmseconds = (lmseconds < 10) ? "0" + lmseconds : lmseconds;
-      lseconds = (lseconds < 10) ? "0" + lseconds : lseconds;
-      lminutes = (lminutes < 10) ? "0" + lminutes : lminutes;
+      time[index]=difference-lasttime;
+      lasttime =difference;
+      laptime=formatTime(time[index]);
+      
   }
 
-  Laps.innerHTML += `
+  Laps.innerHTML = `
     <li id="${index}">
-      <label>Lap ${++index}</label>
-      <label>${lminutes}:${lseconds},${lmseconds}</label>
+      <label class='left'>Lap ${++index}</label>
+      <label class='right'>${laptime}</label>
     </li>
-  `;
+  `+Laps.innerHTML;
 
   if(index==3){
     lastmax=findMax(time);

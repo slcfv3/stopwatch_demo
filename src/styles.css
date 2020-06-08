@@ -12,18 +12,24 @@
 
 body {
   background-color: black;
+  margin: 0;
+}
+
+li{
+  height: 50px;
+  border-bottom: 1px solid #333131;
 }
 
 .display{
   color:white;
   margin-left: auto;
   margin-right: auto;
-  width: 80%;
+  width: 90%;
   text-align: center;
   position: relative;
   top: 100px;
-  font-size: 70px;
-  font-family: Helvetica;
+  font-size: 88px;
+  font-family: Helvetica Neue UltraLight;
   font-weight: 100;
 }
 
@@ -94,4 +100,16 @@ body {
   background-color: #d2857f;
   opacity: 0.5;
   color: #ec2315;
+}
+
+.left{
+  position: relative;
+  right: 30%;
+  top: 30%;
+}
+
+.right{
+  position: relative;
+  left: 30%;
+  top: 30%;
 }
