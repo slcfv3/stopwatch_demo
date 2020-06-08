@@ -1,19 +1,19 @@
-var h1 = document.getElementsByTagName('h1')[0];
+const h1 = document.getElementsByTagName('h1')[0];
 const start = document.getElementById('start');
 const reset = document.getElementById('reset');
 let intervalToken = null;
 const Laps = document.getElementById('laps');
-var isInitial=true;
-var time=[];
-var index=0;
-var lasttime=0;
-var startTime;
-var difference=0;
-var stopTime=0;
-var lastmin=0;
-var lastmax=0;
+let isInitial=true;
+let time=[];
+let index=0;
+let lasttime=0;
+let startTime;
+let difference=0;
+let stopTime=0;
+let lastmin=0;
+let lastmax=0;
 
-
+//function for the start/stop button
 function startStop(){
     if(intervalToken != null){
         clearInterval(intervalToken);
@@ -34,18 +34,19 @@ function startStop(){
     }
 }
 
-
+//function to show the real time on the main display 
 function getShowTime(){
-    var updatedTime = new Date().getTime();
+    let updatedTime = new Date().getTime();
     difference = (updatedTime - startTime) + stopTime;
     
     h1.textContent = formatTime(difference);
 }
 
+//function to convert epoch time to human time
 function formatTime(difference) {
-    var minutes;
-    var secs;
-    var centies;
+    let minutes;
+    let secs;
+    let centies;
     centies = Math.floor(difference/10) % 100;
     secs = Math.floor(Math.floor(difference/10)/100)%60;
     minutes = Math.floor(Math.floor(Math.floor(difference/10)/100)/60);
@@ -56,6 +57,7 @@ function formatTime(difference) {
     return `${minutes}:${secs},${centies}`;
 }
 
+//function for reset/lap button
 function resetLap(){
     if(intervalToken != null){
         loglap();
@@ -72,8 +74,9 @@ function resetLap(){
     
 }
 
+//funtion to log laps 
 function loglap() {
-    var laptime;
+    let laptime;
   
     if(isInitial){
       
@@ -121,7 +124,7 @@ function loglap() {
 }
 
 
-
+//find min 
 function findMin(array) {
     return array.reduce(
         (acc, val, idx) => val < acc.val ? {idx, val} : acc,
@@ -129,6 +132,7 @@ function findMin(array) {
     ).idx;
 }
 
+//find max
 function findMax(array) {
     return array.reduce(
         (acc, val, idx) => val > acc.val ? {idx, val} : acc,
